@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @proyect.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @proyect.description %>
+</p>
+
+<%= form_with model: [@proyect, Employee.new], url: proyect_add_employee_path(@proyect) do |f| %>
+<%= f.select :id, @employee_array %>
+<%= f.submit "add" %>
+<% end %>
+
+<% @proyect.employees.each do |employee| %>
+<%= employee.name %>
+<%= button_to "x",proyect_remove_employee_path(@proyect, employee), method: :delete, class:'btn btn-primary' %>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_proyect_path(@proyect) %> |
+<%= link_to 'Back', proyects_path %>
